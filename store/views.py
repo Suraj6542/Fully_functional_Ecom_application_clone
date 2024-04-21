@@ -3,6 +3,7 @@ from django.views import View
 from django.contrib.auth.hashers import make_password, check_password
 from .models import *
 from store.middlewares.auth import auth_middleware
+from django.contrib.auth import logout as auth_logout
 
 class Index(View):
     def post(self, request):
@@ -129,7 +130,7 @@ class Login(View):
            error_message = 'email or password invalid!!'
            return render(request, 'login.html', {'error': error_message})
         
-def logout(request): 
+def logout(request):
     request.session.clear()
     return redirect('login')
 
